@@ -1,0 +1,39 @@
+{
+  "name": "qa-automation-betalent",
+  "version": "1.0.0",
+  "description": "Suíte completa de testes automatizados - UI (Sauce Demo) e API (Restful-Booker)",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --project=chromium --grep-invert @api",
+    "test:ui:headed": "npx playwright test --project=chromium --grep-invert @api --headed",
+    "test:api": "npx playwright test --project=api",
+    "test:a11y": "npx playwright test tests/ui/accessibility/",
+    "test:responsive": "npx playwright test --project=mobile-chrome --project=mobile-safari --project=tablet",
+    "test:security": "npx playwright test --project=api tests/api/security/",
+    "test:perf": "k6 run tests/api/performance/load-test.js",
+    "test:cross-browser": "npx playwright test --grep-invert @api",
+    "report": "npx playwright show-report",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write \"**/*.{ts,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,json,md}\""
+  },
+  "keywords": ["qa", "automation", "playwright", "typescript", "testing"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.9.0",
+    "@faker-js/faker": "^8.4.0",
+    "@playwright/test": "^1.44.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^3.0.1",
+    "dotenv": "^16.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-playwright": "^1.5.0",
+    "prettier": "^3.2.0",
+    "typescript": "^5.4.0"
+  }
+}
