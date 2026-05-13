@@ -38,7 +38,7 @@ Demonstrar competência em automação de testes end-to-end abrangendo:
 
 - **Node.js** 20+ ([download](https://nodejs.org/))
 - **npm** 9+ (incluído com Node.js)
-- **k6** (opcional, para performance) — [instalação](https://k6.io/docs/get-started/installation/)
+- **k6** — [instalação](https://k6.io/docs/get-started/installation/)
 
 ---
 
@@ -46,7 +46,7 @@ Demonstrar competência em automação de testes end-to-end abrangendo:
 
 ```bash
 # Clonar o repositório
-git clone <repo-url>
+git clone <https://github.com/BernardoMeine/qa-automation-betalent.git>
 cd qa-automation-betalent
 
 # Instalar dependências
