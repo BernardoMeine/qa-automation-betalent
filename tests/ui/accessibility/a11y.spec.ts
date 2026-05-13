@@ -4,6 +4,13 @@ import { LoginPage } from '../../../src/pages/LoginPage';
 import { InventoryPage } from '../../../src/pages/InventoryPage';
 import { users } from '../../../src/fixtures/users';
 
+function logViolations(pageName: string, violations: AxeBuilder.Result['violations']) {
+  const critical = violations.filter((v) => v.impact === 'critical' || v.impact === 'serious');
+  critical.forEach((v) => {
+    console.log(`[${pageName}] [${v.impact}] ${v.id}: ${v.description}`);
+  });
+}
+
 test.describe('Accessibility (WCAG 2.1 AA) - Sauce Demo', () => {
   test('login page should not have critical accessibility violations', async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -13,19 +20,7 @@ test.describe('Accessibility (WCAG 2.1 AA) - Sauce Demo', () => {
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();
 
-    const criticalViolations = results.violations.filter(
-      (v) => v.impact === 'critical' || v.impact === 'serious',
-    );
-
-    if (criticalViolations.length > 0) {
-      console.log('Critical/Serious Violations on Login Page:');
-      criticalViolations.forEach((v) => {
-        console.log(`  - [${v.impact}] ${v.id}: ${v.description}`);
-        console.log(`    Help: ${v.helpUrl}`);
-      });
-    }
-
-    // We log violations but allow the test to pass with a warning for known issues
+    logViolations('Login Page', results.violations);
     expect(results.violations.length).toBeGreaterThanOrEqual(0);
   });
 
@@ -41,20 +36,7 @@ test.describe('Accessibility (WCAG 2.1 AA) - Sauce Demo', () => {
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();
 
-    const criticalViolations = results.violations.filter(
-      (v) => v.impact === 'critical' || v.impact === 'serious',
-    );
-
-    if (criticalViolations.length > 0) {
-      console.log('Critical/Serious Violations on Inventory Page:');
-      criticalViolations.forEach((v) => {
-        console.log(`  - [${v.impact}] ${v.id}: ${v.description}`);
-        v.nodes.forEach((node) => {
-          console.log(`    Element: ${node.html}`);
-        });
-      });
-    }
-
+    logViolations('Inventory Page', results.violations);
     expect(results.violations.length).toBeGreaterThanOrEqual(0);
   });
 
@@ -71,17 +53,7 @@ test.describe('Accessibility (WCAG 2.1 AA) - Sauce Demo', () => {
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();
 
-    const criticalViolations = results.violations.filter(
-      (v) => v.impact === 'critical' || v.impact === 'serious',
-    );
-
-    if (criticalViolations.length > 0) {
-      console.log('Critical/Serious Violations on Cart Page:');
-      criticalViolations.forEach((v) => {
-        console.log(`  - [${v.impact}] ${v.id}: ${v.description}`);
-      });
-    }
-
+    logViolations('Cart Page', results.violations);
     expect(results.violations.length).toBeGreaterThanOrEqual(0);
   });
 
@@ -100,17 +72,7 @@ test.describe('Accessibility (WCAG 2.1 AA) - Sauce Demo', () => {
       .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
       .analyze();
 
-    const criticalViolations = results.violations.filter(
-      (v) => v.impact === 'critical' || v.impact === 'serious',
-    );
-
-    if (criticalViolations.length > 0) {
-      console.log('Critical/Serious Violations on Checkout Page:');
-      criticalViolations.forEach((v) => {
-        console.log(`  - [${v.impact}] ${v.id}: ${v.description}`);
-      });
-    }
-
+    logViolations('Checkout Page', results.violations);
     expect(results.violations.length).toBeGreaterThanOrEqual(0);
   });
 
@@ -119,7 +81,6 @@ test.describe('Accessibility (WCAG 2.1 AA) - Sauce Demo', () => {
     await loginPage.navigate();
     await loginPage.login(users.standard.username, users.standard.password);
 
-    // Sauce Demo uses span.title instead of semantic headings (documented as a11y issue)
     const titleElement = page.locator('[data-test="title"]');
     await expect(titleElement).toBeVisible();
     const titleText = await titleElement.textContent();
@@ -145,7 +106,6 @@ test.describe('Accessibility (WCAG 2.1 AA) - Sauce Demo', () => {
     await loginPage.navigate();
     await loginPage.login(users.standard.username, users.standard.password);
 
-    // Tab through main elements
     await page.keyboard.press('Tab');
     const focused = await page.evaluate(() => document.activeElement?.tagName);
     expect(focused).toBeTruthy();

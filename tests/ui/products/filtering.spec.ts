@@ -40,9 +40,7 @@ test.describe('Product Filtering and Display - Sauce Demo', () => {
     // Known Sauce Demo behavior: sort resets to A-Z (default) after navigation
     await inventoryPage.sortBy('hilo');
 
-    await inventoryPage.clickProduct(
-      (await inventoryPage.getProductNames())[0],
-    );
+    await inventoryPage.clickProduct((await inventoryPage.getProductNames())[0]);
     await page.goBack();
 
     const namesAfter = await inventoryPage.getProductNames();

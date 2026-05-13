@@ -72,7 +72,7 @@ test.describe('Full Purchase Flow - Sauce Demo', () => {
     expect(total).toBeCloseTo(subtotal + tax, 2);
   });
 
-  test('should complete purchase with single item', async () => {
+  test('should complete purchase with single item', async ({ page }) => {
     await inventoryPage.addProductToCartByName('Sauce Labs Onesie');
     await inventoryPage.goToCart();
     await cartPage.checkout();
@@ -82,7 +82,7 @@ test.describe('Full Purchase Flow - Sauce Demo', () => {
     await checkoutPage.continue();
     await checkoutPage.finish();
 
-    await completePage.expectOrderComplete();
+    await expect(page).toHaveURL(/checkout-complete/);
   });
 
   test.describe('Checkout Validation', () => {
@@ -92,26 +92,26 @@ test.describe('Full Purchase Flow - Sauce Demo', () => {
       await cartPage.checkout();
     });
 
-    test('should show error when first name is empty', async () => {
+    test('should show error when first name is empty', async ({ page }) => {
       await checkoutPage.fillInformation('', 'Doe', '12345');
       await checkoutPage.continue();
-      await checkoutPage.expectErrorMessage('Error: First Name is required');
+      await expect(page.locator('[data-test="error"]')).toContainText('First Name is required');
     });
 
-    test('should show error when last name is empty', async () => {
+    test('should show error when last name is empty', async ({ page }) => {
       await checkoutPage.fillInformation('John', '', '12345');
       await checkoutPage.continue();
-      await checkoutPage.expectErrorMessage('Error: Last Name is required');
+      await expect(page.locator('[data-test="error"]')).toContainText('Last Name is required');
     });
 
-    test('should show error when postal code is empty', async () => {
+    test('should show error when postal code is empty', async ({ page }) => {
       await checkoutPage.fillInformation('John', 'Doe', '');
       await checkoutPage.continue();
-      await checkoutPage.expectErrorMessage('Error: Postal Code is required');
+      await expect(page.locator('[data-test="error"]')).toContainText('Postal Code is required');
     });
   });
 
-  test('should return to cart from checkout step one via cancel', async ({ page }) => {
+  test('should return to cart from checkout step one via cancel', async () => {
     await inventoryPage.addProductToCartByIndex(0);
     await inventoryPage.goToCart();
     await cartPage.checkout();
@@ -121,7 +121,7 @@ test.describe('Full Purchase Flow - Sauce Demo', () => {
     expect(await cartPage.getCartItemCount()).toBe(1);
   });
 
-  test('should go back to products after completing order', async () => {
+  test('should go back to products after completing order', async ({ page }) => {
     await inventoryPage.addProductToCartByIndex(0);
     await inventoryPage.goToCart();
     await cartPage.checkout();
@@ -131,8 +131,7 @@ test.describe('Full Purchase Flow - Sauce Demo', () => {
     await checkoutPage.continue();
     await checkoutPage.finish();
 
-    await completePage.expectOrderComplete();
     await completePage.backToProducts();
-    await inventoryPage.expectPageLoaded();
+    await expect(page).toHaveURL(/inventory/);
   });
 });

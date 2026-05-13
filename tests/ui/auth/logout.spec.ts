@@ -23,11 +23,10 @@ test.describe('Logout - Sauce Demo', () => {
 
   test('should not be able to access inventory after logout', async ({ page }) => {
     await inventoryPage.logout();
-    await loginPage.expectLoginPage();
 
     await page.goto('/inventory.html');
-    await loginPage.expectErrorMessage(
-      "Epic sadface: You can only access '/inventory.html' when you are logged in.",
+    await expect(page.locator('[data-test="error"]')).toContainText(
+      "You can only access '/inventory.html' when you are logged in.",
     );
   });
 

@@ -18,7 +18,21 @@
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-explicit-any": "warn",
     "playwright/no-wait-for-timeout": "warn",
-    "playwright/expect-expect": "error"
+    "playwright/expect-expect": [
+      "error",
+      {
+        "assertFunctionNames": [
+          "expect",
+          "expectPageLoaded",
+          "expectLoginPage",
+          "expectErrorMessage",
+          "expectStepOneLoaded",
+          "expectStepTwoLoaded",
+          "expectOrderComplete"
+        ]
+      }
+    ],
+    "playwright/no-conditional-in-test": "off"
   },
   "ignorePatterns": ["dist/", "node_modules/", "playwright-report/", "test-results/", "*.js"]
 }

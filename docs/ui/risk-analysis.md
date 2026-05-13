@@ -23,18 +23,18 @@ quadrantChart
 
 ## Detailed Risk Register
 
-| ID | Risk | Probability | Impact | Score | Mitigation |
-|----|------|-------------|--------|-------|------------|
-| R01 | Session not invalidated after logout | High (4/5) | High (4/5) | 16 | Implement server-side session management, add token expiry |
-| R02 | Checkout form fails for problem_user | High (4/5) | Critical (5/5) | 20 | Fix input event handlers, add form state persistence |
-| R03 | Performance degradation under load | High (4/5) | Medium (3/5) | 12 | Implement CDN, optimize assets, add performance monitoring |
-| R04 | Product images fail to load | Very High (5/5) | Low (2/5) | 10 | Add image validation, implement fallback/placeholder system |
-| R05 | Cart data loss on navigation | Low (2/5) | Critical (5/5) | 10 | Persist cart state server-side, add local storage backup |
-| R06 | Sorting errors for error_user | Medium (3/5) | Medium (3/5) | 9 | Add error boundaries, implement fallback sort |
-| R07 | Cross-browser rendering issues | Medium (3/5) | Medium (3/5) | 9 | Cross-browser testing in CI, use CSS reset/normalize |
-| R08 | Payment flow failure | Low (1/5) | Critical (5/5) | 5 | Transaction retry logic, error recovery flow |
-| R09 | Mobile layout breaks | Medium (3/5) | Medium (3/5) | 9 | Responsive design testing, mobile-first approach |
-| R10 | Accessibility non-compliance | High (4/5) | Medium (3/5) | 12 | Automated a11y testing, manual audit, remediation plan |
+| ID  | Risk                                 | Probability     | Impact         | Score | Mitigation                                                  |
+| --- | ------------------------------------ | --------------- | -------------- | ----- | ----------------------------------------------------------- |
+| R01 | Session not invalidated after logout | High (4/5)      | High (4/5)     | 16    | Implement server-side session management, add token expiry  |
+| R02 | Checkout form fails for problem_user | High (4/5)      | Critical (5/5) | 20    | Fix input event handlers, add form state persistence        |
+| R03 | Performance degradation under load   | High (4/5)      | Medium (3/5)   | 12    | Implement CDN, optimize assets, add performance monitoring  |
+| R04 | Product images fail to load          | Very High (5/5) | Low (2/5)      | 10    | Add image validation, implement fallback/placeholder system |
+| R05 | Cart data loss on navigation         | Low (2/5)       | Critical (5/5) | 10    | Persist cart state server-side, add local storage backup    |
+| R06 | Sorting errors for error_user        | Medium (3/5)    | Medium (3/5)   | 9     | Add error boundaries, implement fallback sort               |
+| R07 | Cross-browser rendering issues       | Medium (3/5)    | Medium (3/5)   | 9     | Cross-browser testing in CI, use CSS reset/normalize        |
+| R08 | Payment flow failure                 | Low (1/5)       | Critical (5/5) | 5     | Transaction retry logic, error recovery flow                |
+| R09 | Mobile layout breaks                 | Medium (3/5)    | Medium (3/5)   | 9     | Responsive design testing, mobile-first approach            |
+| R10 | Accessibility non-compliance         | High (4/5)      | Medium (3/5)   | 12    | Automated a11y testing, manual audit, remediation plan      |
 
 ## Risk Scoring
 
@@ -49,11 +49,13 @@ quadrantChart
 ## Mitigation Strategies
 
 ### Critical Risks (Score ≥ 16)
+
 1. **R02 - Checkout Form Failure**: Requires immediate fix. Users cannot complete purchases.
    - Short-term: Add client-side form state backup
    - Long-term: Refactor form handling architecture
 
 ### High Risks (Score 10-15)
+
 2. **R01 - Session Security**: Security vulnerability.
    - Implement HttpOnly cookies with server-side session store
    - Add session timeout (30 min idle)
@@ -65,9 +67,11 @@ quadrantChart
    - Quarterly accessibility audits
 
 ### Medium Risks (Score 5-9)
+
 5. Monitor and accept with existing automated test coverage
 
 ## Review Schedule
+
 - **Weekly**: Monitor critical risks
 - **Bi-weekly**: Review high risks
 - **Monthly**: Full risk register review

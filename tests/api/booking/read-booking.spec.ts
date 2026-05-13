@@ -39,10 +39,7 @@ test.describe('API Read Booking - Restful-Booker @api', () => {
     const { body } = await client.getBookingById(createdBookingId);
 
     const valid = validateBooking(body);
-    if (!valid) {
-      console.log('Schema errors:', validateBooking.errors);
-    }
-    expect(valid).toBeTruthy();
+    expect(valid, JSON.stringify(validateBooking.errors)).toBeTruthy();
   });
 
   test('should return 404 for non-existent booking', async () => {

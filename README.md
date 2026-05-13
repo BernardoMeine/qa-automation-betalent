@@ -9,6 +9,7 @@ Suíte completa de testes automatizados cobrindo **UI Testing** (Sauce Demo) e *
 ## Objetivo
 
 Demonstrar competência em automação de testes end-to-end abrangendo:
+
 - Testes funcionais de interface (E2E)
 - Testes de API RESTful (CRUD completo)
 - Testes de acessibilidade (WCAG 2.1 AA)
@@ -20,16 +21,16 @@ Demonstrar competência em automação de testes end-to-end abrangendo:
 
 ## Stack Tecnológica
 
-| Tecnologia | Função | Justificativa |
-|-----------|--------|---------------|
-| TypeScript | Linguagem | Tipagem estática, autocompletar, manutenibilidade |
-| Playwright Test | UI E2E + API | Multi-browser, auto-wait, API nativo, traces |
-| @axe-core/playwright | Acessibilidade | Padrão da indústria para WCAG |
-| Ajv | JSON Schema | Validação rigorosa de contratos API |
-| @faker-js/faker | Dados de teste | Dados realistas e únicos |
-| k6 | Performance | Scripting flexível, métricas detalhadas |
-| ESLint + Prettier | Qualidade | Consistência de código |
-| GitHub Actions | CI/CD | Automação de pipeline |
+| Tecnologia           | Função         | Justificativa                                     |
+| -------------------- | -------------- | ------------------------------------------------- |
+| TypeScript           | Linguagem      | Tipagem estática, autocompletar, manutenibilidade |
+| Playwright Test      | UI E2E + API   | Multi-browser, auto-wait, API nativo, traces      |
+| @axe-core/playwright | Acessibilidade | Padrão da indústria para WCAG                     |
+| Ajv                  | JSON Schema    | Validação rigorosa de contratos API               |
+| @faker-js/faker      | Dados de teste | Dados realistas e únicos                          |
+| k6                   | Performance    | Scripting flexível, métricas detalhadas           |
+| ESLint + Prettier    | Qualidade      | Consistência de código                            |
+| GitHub Actions       | CI/CD          | Automação de pipeline                             |
 
 ---
 
@@ -63,6 +64,7 @@ cp .env.example .env
 ## Como Executar
 
 ### Testes UI
+
 ```bash
 # Todos os testes UI (Chromium)
 npm run test:ui
@@ -75,37 +77,44 @@ npm run test:cross-browser
 ```
 
 ### Testes API
+
 ```bash
 npm run test:api
 ```
 
 ### Testes de Acessibilidade
+
 ```bash
 npm run test:a11y
 ```
 
 ### Testes Responsivos
+
 ```bash
 npm run test:responsive
 ```
 
 ### Testes de Segurança (API)
+
 ```bash
 npm run test:security
 ```
 
 ### Testes de Performance (k6)
+
 ```bash
 # Requer k6 instalado
 npm run test:perf
 ```
 
 ### Relatório HTML
+
 ```bash
 npm run report
 ```
 
 ### Todos os Testes
+
 ```bash
 npm test
 ```
@@ -185,6 +194,7 @@ qa-automation-betalent/
 ## CI/CD
 
 O workflow do GitHub Actions executa automaticamente:
+
 - Lint e formatação
 - Testes UI em 3 browsers (paralelo)
 - Testes API
@@ -197,20 +207,20 @@ Artefatos (relatórios HTML, screenshots, vídeos) são salvos por 30 dias.
 
 ## Scripts Disponíveis
 
-| Comando | Descrição |
-|---------|-----------|
-| `npm test` | Executa todos os testes |
-| `npm run test:ui` | Testes UI (Chromium) |
-| `npm run test:ui:headed` | Testes UI com browser visível |
-| `npm run test:api` | Testes API |
-| `npm run test:a11y` | Testes de acessibilidade |
-| `npm run test:responsive` | Testes responsivos |
-| `npm run test:security` | Testes de segurança (SQLi, XSS, auth bypass) |
-| `npm run test:cross-browser` | Todos os browsers |
-| `npm run test:perf` | Load test (k6) |
-| `npm run report` | Abrir relatório HTML |
-| `npm run lint` | Verificar lint |
-| `npm run format` | Formatar código |
+| Comando                      | Descrição                                    |
+| ---------------------------- | -------------------------------------------- |
+| `npm test`                   | Executa todos os testes                      |
+| `npm run test:ui`            | Testes UI (Chromium)                         |
+| `npm run test:ui:headed`     | Testes UI com browser visível                |
+| `npm run test:api`           | Testes API                                   |
+| `npm run test:a11y`          | Testes de acessibilidade                     |
+| `npm run test:responsive`    | Testes responsivos                           |
+| `npm run test:security`      | Testes de segurança (SQLi, XSS, auth bypass) |
+| `npm run test:cross-browser` | Todos os browsers                            |
+| `npm run test:perf`          | Load test (k6)                               |
+| `npm run report`             | Abrir relatório HTML                         |
+| `npm run lint`               | Verificar lint                               |
+| `npm run format`             | Formatar código                              |
 
 ---
 

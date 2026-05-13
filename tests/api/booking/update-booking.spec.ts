@@ -41,10 +41,7 @@ test.describe('API Update Booking - Restful-Booker @api', () => {
     });
 
     test('should reject update without authentication', async () => {
-      const { status } = await client.updateBookingWithoutAuth(
-        createdBookingId,
-        updatedBooking,
-      );
+      const { status } = await client.updateBookingWithoutAuth(createdBookingId, updatedBooking);
 
       expect([403, 401]).toContain(status);
     });
@@ -52,10 +49,7 @@ test.describe('API Update Booking - Restful-Booker @api', () => {
 
   test.describe('PATCH - Partial Update', () => {
     test('should partially update booking with authentication', async () => {
-      const { status, body } = await client.partialUpdateBooking(
-        createdBookingId,
-        partialUpdate,
-      );
+      const { status, body } = await client.partialUpdateBooking(createdBookingId, partialUpdate);
 
       expect(status).toBe(200);
       expect(body.firstname).toBe(partialUpdate.firstname);
@@ -81,10 +75,7 @@ test.describe('API Update Booking - Restful-Booker @api', () => {
           checkout: '2025-06-15',
         },
       };
-      const { status, body } = await client.partialUpdateBooking(
-        createdBookingId,
-        newDates,
-      );
+      const { status, body } = await client.partialUpdateBooking(createdBookingId, newDates);
 
       expect(status).toBe(200);
       expect(body.bookingdates.checkin).toBe('2025-06-01');

@@ -16,9 +16,7 @@ export class CheckoutPage extends BasePage {
   }
 
   async expectStepOneLoaded(): Promise<void> {
-    await expect(this.page.locator('[data-test="title"]')).toHaveText(
-      'Checkout: Your Information',
-    );
+    await expect(this.page.locator('[data-test="title"]')).toHaveText('Checkout: Your Information');
   }
 
   async fillInformation(firstName: string, lastName: string, postalCode: string): Promise<void> {

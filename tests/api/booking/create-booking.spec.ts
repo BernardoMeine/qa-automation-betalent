@@ -29,10 +29,7 @@ test.describe('API Create Booking - Restful-Booker @api', () => {
     const { body } = await client.createBooking(validBooking);
 
     const valid = validateBookingResponse(body);
-    if (!valid) {
-      console.log('Schema validation errors:', validateBookingResponse.errors);
-    }
-    expect(valid).toBeTruthy();
+    expect(valid, JSON.stringify(validateBookingResponse.errors)).toBeTruthy();
   });
 
   test('should create booking with generated data', async () => {

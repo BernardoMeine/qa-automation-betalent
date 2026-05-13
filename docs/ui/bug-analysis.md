@@ -102,11 +102,11 @@
 
 ## Summary
 
-| Bug ID | Severity | Status | User Affected |
-|--------|----------|--------|---------------|
-| BUG-001 | Medium | Open | problem_user |
-| BUG-002 | Medium | Open | performance_glitch_user |
-| BUG-003 | High | Open | problem_user |
-| BUG-004 | Medium | Open | error_user |
-| BUG-005 | Low | Open | visual_user |
-| BUG-006 | High | Open | All users |
+| Bug ID  | Severity | Status | User Affected           |
+| ------- | -------- | ------ | ----------------------- |
+| BUG-001 | Medium   | Open   | problem_user            |
+| BUG-002 | Medium   | Open   | performance_glitch_user |
+| BUG-003 | High     | Open   | problem_user            |
+| BUG-004 | Medium   | Open   | error_user              |
+| BUG-005 | Low      | Open   | visual_user             |
+| BUG-006 | High     | Open   | All users               |

@@ -44,7 +44,7 @@ test.describe('Cart Management - Sauce Demo', () => {
       expect(items.length).toBe(2);
     });
 
-    test('button should change from Add to Remove after adding', async ({ page }) => {
+    test('button should change from Add to Remove after adding', async () => {
       await inventoryPage.addProductToCartByName('Sauce Labs Backpack');
       const button = inventoryPage.getAddToCartButton('Sauce Labs Backpack');
       await expect(button).toHaveText('Remove');
@@ -64,11 +64,9 @@ test.describe('Cart Management - Sauce Demo', () => {
       await inventoryPage.addProductToCartByIndex(0);
       expect(await inventoryPage.getCartBadgeCount()).toBe(1);
 
-      await inventoryPage.removeProductByName(
-        (await inventoryPage.getProductNames())[0],
-      );
+      await inventoryPage.removeProductByName((await inventoryPage.getProductNames())[0]);
       const badge = page.locator('[data-test="shopping-cart-badge"]');
-      await expect(badge).not.toBeVisible();
+      await expect(badge).toBeHidden();
     });
   });
 
@@ -89,9 +87,7 @@ test.describe('Cart Management - Sauce Demo', () => {
       await inventoryPage.addProductToCartByIndex(1);
       await inventoryPage.goToCart();
 
-      await cartPage.removeItemByName(
-        (await cartPage.getCartItemNames())[0],
-      );
+      await cartPage.removeItemByName((await cartPage.getCartItemNames())[0]);
       expect(await cartPage.getCartBadgeCount()).toBe(1);
     });
 
@@ -104,7 +100,7 @@ test.describe('Cart Management - Sauce Demo', () => {
 
       expect(await cartPage.getCartItemCount()).toBe(0);
       const badge = page.locator('[data-test="shopping-cart-badge"]');
-      await expect(badge).not.toBeVisible();
+      await expect(badge).toBeHidden();
     });
   });
 

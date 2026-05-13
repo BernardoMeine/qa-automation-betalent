@@ -115,13 +115,13 @@
 
 ## Summary
 
-| Bug ID | Severity | Category | Status |
-|--------|----------|----------|--------|
-| API-BUG-001 | Medium | Standards | Open |
-| API-BUG-002 | Low | Standards | Open |
-| API-BUG-003 | High | Validation | Open |
-| API-BUG-004 | High | Security | Open |
-| API-BUG-005 | Medium | Security | Open |
-| API-BUG-006 | Medium | Validation | Open |
-| API-BUG-007 | Low | Standards | Open |
-| API-BUG-008 | Low | Documentation | Open |
+| Bug ID      | Severity | Category      | Status |
+| ----------- | -------- | ------------- | ------ |
+| API-BUG-001 | Medium   | Standards     | Open   |
+| API-BUG-002 | Low      | Standards     | Open   |
+| API-BUG-003 | High     | Validation    | Open   |
+| API-BUG-004 | High     | Security      | Open   |
+| API-BUG-005 | Medium   | Security      | Open   |
+| API-BUG-006 | Medium   | Validation    | Open   |
+| API-BUG-007 | Low      | Standards     | Open   |
+| API-BUG-008 | Low      | Documentation | Open   |

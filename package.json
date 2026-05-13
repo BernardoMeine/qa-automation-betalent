@@ -18,7 +18,13 @@
     "format": "prettier --write \"**/*.{ts,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,json,md}\""
   },
-  "keywords": ["qa", "automation", "playwright", "typescript", "testing"],
+  "keywords": [
+    "qa",
+    "automation",
+    "playwright",
+    "typescript",
+    "testing"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {

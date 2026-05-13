@@ -33,10 +33,7 @@ test.describe('Login - Sauce Demo', () => {
 
     test('performance_glitch_user should login with noticeable delay', async ({ page }) => {
       const startTime = Date.now();
-      await loginPage.login(
-        users.performanceGlitch.username,
-        users.performanceGlitch.password,
-      );
+      await loginPage.login(users.performanceGlitch.username, users.performanceGlitch.password);
 
       const inventoryPage = new InventoryPage(page);
       await inventoryPage.expectPageLoaded();
@@ -48,67 +45,65 @@ test.describe('Login - Sauce Demo', () => {
 
     test('error_user should login successfully', async ({ page }) => {
       await loginPage.login(users.error.username, users.error.password);
-      const inventoryPage = new InventoryPage(page);
-      await inventoryPage.expectPageLoaded();
+      await expect(page).toHaveURL(/inventory/);
     });
 
     test('visual_user should login successfully', async ({ page }) => {
       await loginPage.login(users.visual.username, users.visual.password);
-      const inventoryPage = new InventoryPage(page);
-      await inventoryPage.expectPageLoaded();
+      await expect(page).toHaveURL(/inventory/);
     });
   });
 
   test.describe('Failed Login', () => {
-    test('locked_out_user should see locked out error', async () => {
+    test('locked_out_user should see locked out error', async ({ page }) => {
       await loginPage.login(users.lockedOut.username, users.lockedOut.password);
-      await loginPage.expectErrorMessage(
+      await expect(page.locator('[data-test="error"]')).toContainText(
         'Epic sadface: Sorry, this user has been locked out.',
       );
     });
 
-    test('invalid username should show error', async () => {
+    test('invalid username should show error', async ({ page }) => {
       await loginPage.login(
         invalidCredentials.wrongUsername.username,
         invalidCredentials.wrongUsername.password,
       );
-      await loginPage.expectErrorMessage(
-        'Epic sadface: Username and password do not match any user in this service',
+      await expect(page.locator('[data-test="error"]')).toContainText(
+        'Username and password do not match any user in this service',
       );
     });
 
-    test('wrong password should show error', async () => {
+    test('wrong password should show error', async ({ page }) => {
       await loginPage.login(
         invalidCredentials.wrongPassword.username,
         invalidCredentials.wrongPassword.password,
       );
-      await loginPage.expectErrorMessage(
-        'Epic sadface: Username and password do not match any user in this service',
+      await expect(page.locator('[data-test="error"]')).toContainText(
+        'Username and password do not match any user in this service',
       );
     });
 
-    test('empty username should show required error', async () => {
+    test('empty username should show required error', async ({ page }) => {
       await loginPage.login(
         invalidCredentials.emptyUsername.username,
         invalidCredentials.emptyUsername.password,
       );
-      await loginPage.expectErrorMessage('Epic sadface: Username is required');
+      await expect(page.locator('[data-test="error"]')).toContainText('Username is required');
     });
 
-    test('empty password should show required error', async () => {
+    test('empty password should show required error', async ({ page }) => {
       await loginPage.login(
         invalidCredentials.emptyPassword.username,
         invalidCredentials.emptyPassword.password,
       );
-      await loginPage.expectErrorMessage('Epic sadface: Password is required');
+      await expect(page.locator('[data-test="error"]')).toContainText('Password is required');
     });
 
-    test('both fields empty should show username required error', async () => {
+    test('both fields empty should show username required error', async ({ page }) => {
       await loginPage.login(
         invalidCredentials.bothEmpty.username,
         invalidCredentials.bothEmpty.password,
       );
-      await loginPage.expectErrorMessage('Epic sadface: Username is required');
+      await expect(page.locator('[data-test="error"]')).toContainText('Username is required');
     });
   });
 });

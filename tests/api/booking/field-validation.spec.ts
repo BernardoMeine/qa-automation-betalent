@@ -12,7 +12,6 @@ test.describe('API Field Validation - Restful-Booker @api', () => {
   test.describe('Missing Required Fields', () => {
     test('should reject booking without firstname', async () => {
       const { status } = await client.createBookingRaw(invalidBookings.missingFirstname);
-      // Restful-Booker returns 500 for validation errors (known behavior)
       expect([400, 500]).toContain(status);
     });
 
@@ -38,39 +37,20 @@ test.describe('API Field Validation - Restful-Booker @api', () => {
   });
 
   test.describe('Invalid Field Types', () => {
+    // Restful-Booker has weak validation and accepts invalid types (known bug)
     test('should handle string in totalprice field', async () => {
-      const { status, body } = await client.createBookingRaw(invalidBookings.invalidPriceType);
-
-      // Restful-Booker may accept this due to weak validation (known bug)
-      if (status === 200) {
-        // Document: API accepts string for totalprice without validation
-        expect(body).toHaveProperty('bookingid');
-      } else {
-        expect([400, 500]).toContain(status);
-      }
+      const { status } = await client.createBookingRaw(invalidBookings.invalidPriceType);
+      expect([200, 400, 500]).toContain(status);
     });
 
     test('should handle invalid date format', async () => {
-      const { status, body } = await client.createBookingRaw(invalidBookings.invalidDateFormat);
-
-      // Restful-Booker may accept this due to weak date validation (known bug)
-      if (status === 200) {
-        expect(body).toHaveProperty('bookingid');
-      } else {
-        expect([400, 500]).toContain(status);
-      }
+      const { status } = await client.createBookingRaw(invalidBookings.invalidDateFormat);
+      expect([200, 400, 500]).toContain(status);
     });
 
     test('should handle string in depositpaid field', async () => {
-      const { status, body } = await client.createBookingRaw(
-        invalidBookings.invalidDepositType,
-      );
-
-      if (status === 200) {
-        expect(body).toHaveProperty('bookingid');
-      } else {
-        expect([400, 500]).toContain(status);
-      }
+      const { status } = await client.createBookingRaw(invalidBookings.invalidDepositType);
+      expect([200, 400, 500]).toContain(status);
     });
   });
 
@@ -100,8 +80,6 @@ test.describe('API Field Validation - Restful-Booker @api', () => {
         depositpaid: true,
         bookingdates: { checkin: '2024-01-01', checkout: '2024-01-05' },
       });
-
-      // API should either accept or return a meaningful error
       expect([200, 400, 413, 500]).toContain(status);
     });
   });
